@@ -128,14 +128,28 @@ git log --oneline -10
 
 ### fd 命令找不到
 
+**推荐使用 conda 安装（无需 root 权限）:**
+
+```bash
+# 创建非 base 环境安装 fd
+conda create -n fd_env fd-find
+conda activate fd_env
+
+# 或在现有非 base 环境中安装
+conda install -n your_env fd-find
+```
+
+**其他安装方式:**
 ```bash
 # 检查 PATH
 which fd
 
-# 安装 fd
+# 系统包管理器安装（需要 root 权限）
 sudo apt install fd-find  # Debian/Ubuntu
 sudo yum install fd-find  # RHEL/CentOS
-cargo install fd-find     # 使用 cargo
+
+# 使用 cargo 安装
+cargo install fd-find
 ```
 
 ### Git push 失败
