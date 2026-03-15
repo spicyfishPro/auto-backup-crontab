@@ -1,0 +1,34 @@
+# 日志文件
+*.log
+backup_log.txt
+
+# 备份目录示例
+my_script_backup/
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+
+# 编辑器文件
+.vscode/
+.idea/
+*.sublime-*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 敏感信息
+*.env
+*.key
+*.pem
+.secrets/
+.ssh/
+
+# 大文件和目录
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
