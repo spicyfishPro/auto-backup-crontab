@@ -1,6 +1,6 @@
 # Auto Backup Crontab
 
-自动化个人脚本备份工具,支持文件筛选、Git 版本控制和 Conda 环境导出。
+自动化个人脚本备份工具，支持文件筛选、Git 版本控制和 Conda 环境导出。
 
 ## 主要功能
 
@@ -34,7 +34,7 @@
 
 ### 前置要求检查
 
-在开始之前,请确保以下工具已安装并可用:
+在开始之前，请确保以下工具已安装并可用:
 
 ```bash
 # 检查依赖工具
@@ -47,7 +47,7 @@ which conda   # Conda 环境管理工具(可选)
 ssh -i ~/.ssh/id_rsa -T git@github.com
 ```
 
-如果某些工具未安装,请参考 [故障排除](#故障排除) 部分。
+如果某些工具未安装，请参考 [故障排除](#故障排除) 部分。
 
 ### 5 分钟快速配置
 
@@ -60,7 +60,7 @@ cd <repo-name>
 
 #### 2. 修改脚本配置(必须)
 
-编辑 `auto_backup_crontab.sh`,根据你的环境修改以下关键配置:
+编辑 `auto_backup_crontab.sh`，根据你的环境修改以下关键配置:
 
 **第3行 - 修改为你的家目录:**
 ```bash
@@ -107,8 +107,8 @@ crontab -e
 
 ### 重要配置说明
 
-- **HOME 路径**: 脚本第3行硬编码了家目录路径,如果你的家目录不同,请直接修改第3行
-- **Conda 环境**: 脚本第20行包含 `source activate storage_monitor`,如果不需要请删除此行
+- **HOME 路径**: 脚本第3行硬编码了家目录路径，如果你的家目录不同，请直接修改第3行
+- **Conda 环境**: 脚本第20行包含 `source activate storage_monitor`，如果不需要请删除此行
 - **SSH 密钥权限**: 确保 SSH 私钥权限正确: `chmod 600 ~/.ssh/id_rsa`
 
 ## 详细配置说明
@@ -129,19 +129,19 @@ LOG_FILE="$HOME/backup_log.txt"          # 日志文件路径
 ### 关键参数解释
 
 #### MAX_SIZE
-最大文件大小限制,使用 fd 格式:
+最大文件大小限制，使用 fd 格式:
 - `-100m`: 小于 100MB 的文件
 - `-10m`: 小于 10MB 的文件
 - `+100m`: 大于 100MB 的文件
 
 #### SEARCH_PATTERN
-文件类型匹配正则表达式,支持:
+文件类型匹配正则表达式，支持:
 - 文件扩展名: `\.(sh|py|js)$`
 - 特定文件名: `^(Dockerfile|Makefile)$`
 - 组合使用: `\.(sh|py)$|^(Dockerfile|Makefile)$`
 
 #### EXCLUDES
-排除目录数组,使用 rsync 的 `--exclude` 格式:
+排除目录数组，使用 rsync 的 `--exclude` 格式:
 ```bash
 EXCLUDES=(
     --exclude "node_modules"       # 排除特定目录
@@ -151,10 +151,10 @@ EXCLUDES=(
 ```
 
 #### BRANCH
-Git 分支名称,默认为 `main`,可以修改为 `backup` 等自定义分支名。
+Git 分支名称，默认为 `main`，可以修改为 `backup` 等自定义分支名。
 
 #### LOG_FILE
-日志文件路径,建议使用绝对路径以便于 crontab 定位。
+日志文件路径，建议使用绝对路径以便于 crontab 定位。
 
 ### 自定义排除目录示例
 
@@ -175,10 +175,10 @@ EXCLUDES=(
 | 目录类型 | 排除示例 | 说明 |
 |---------|---------|------|
 | Node.js | `--exclude "node_modules"` | npm 依赖包 |
-| Python | `--exclude ".venv"`, `--exclude "__pycache__"` | 虚拟环境和编译缓存 |
-| 构建产物 | `--exclude "build"`, `--exclude "dist"` | 编译和打包文件 |
-| IDE 配置 | `--exclude ".idea"`, `--exclude ".vscode"` | 编辑器配置 |
-| 缓存 | `--exclude ".cache"`, `--exclude ".npm"` | 系统和工具缓存 |
+| Python | `--exclude ".venv"`， `--exclude "__pycache__"` | 虚拟环境和编译缓存 |
+| 构建产物 | `--exclude "build"`， `--exclude "dist"` | 编译和打包文件 |
+| IDE 配置 | `--exclude ".idea"`， `--exclude ".vscode"` | 编辑器配置 |
+| 缓存 | `--exclude ".cache"`， `--exclude ".npm"` | 系统和工具缓存 |
 
 #### 敏感目录建议
 
@@ -390,7 +390,7 @@ Error: 'fd' command not found. Please check PATH in script.
    ```
 
 4. **更新脚本 PATH**
-   如果 fd 安装在非标准路径,更新脚本第12行:
+   如果 fd 安装在非标准路径，更新脚本第12行:
    ```bash
    export PATH=/path/to/fd:$PATH
    ```
@@ -515,7 +515,7 @@ Warning: 'conda' command not found. Skipping environment backup.
 
 3. **更新脚本环境激活(第20行):**
    ```bash
-   # 如果不需要 conda,删除或注释掉此行
+   # 如果不需要 conda，删除或注释掉此行
    # source activate storage_monitor
    ```
 
@@ -589,7 +589,7 @@ grep "2026-03-15" ~/backup_log.txt
 
 #### 启用详细输出模式
 
-脚本输出已重定向到日志文件,可以通过以下方式查看详细执行过程:
+脚本输出已重定向到日志文件，可以通过以下方式查看详细执行过程:
 
 ```bash
 # 查看脚本执行的所有命令
@@ -623,7 +623,7 @@ git status
 # 使用 rebase 解决冲突
 git pull --rebase origin main
 
-# 如果有冲突,手动解决后:
+# 如果有冲突，手动解决后:
 git add .
 git rebase --continue
 
@@ -666,7 +666,7 @@ export GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_rsa" -o UserKnownHostsFile=~/.ssh/
 
 #### 敏感信息泄露检查
 
-定期检查备份仓库,确保没有泄露敏感信息:
+定期检查备份仓库，确保没有泄露敏感信息:
 
 ```bash
 # 搜索可能包含敏感信息的文件
@@ -684,7 +684,7 @@ git log --all --full-history --source -- "*.env" "*.key" "*.pem"
 
 ### 如何报告问题
 
-如果你遇到问题或发现 bug,请通过 GitHub Issues 报告:
+如果你遇到问题或发现 bug，请通过 GitHub Issues 报告:
 
 1. **使用清晰的标题**: 简要描述问题
 2. **提供环境信息**:
@@ -741,16 +741,16 @@ git log --all --full-history --source -- "*.env" "*.key" "*.pem"
    git push origin feature/my-feature
    ```
 
-5. **创建 Pull Request**: 在 GitHub 上创建 PR,描述你的更改
+5. **创建 Pull Request**: 在 GitHub 上创建 PR，描述你的更改
 
 ### 代码风格规范
 
 #### Shell 脚本代码风格
 
-- **缩进**: 使用 4 个空格,不使用 Tab
+- **缩进**: 使用 4 个空格，不使用 Tab
 - **变量命名**: 使用大写加下划线: `MY_VARIABLE`
 - **函数命名**: 使用小写加下划线: `my_function`
-- **注释**: 使用 `#` 进行注释,重要逻辑必须添加注释
+- **注释**: 使用 `#` 进行注释，重要逻辑必须添加注释
 
 ```bash
 # 好的示例
@@ -779,14 +779,14 @@ my_function() {
 
 # ===========================================
 # Function: backup_files
-# Parameters: $1 - source directory, $2 - destination directory
-# Returns: 0 on success, 1 on failure
+# Parameters: $1 - source directory， $2 - destination directory
+# Returns: 0 on success， 1 on failure
 # ===========================================
 backup_files() {
     local src_dir="$1"
     local dest_dir="$2"
 
-    # 复制文件,排除特定目录
+    # 复制文件，排除特定目录
     rsync -av --exclude="node_modules" "$src_dir/" "$dest_dir/"
 }
 ```
@@ -841,7 +841,7 @@ auto_backup_crontab.sh
 ├── fd (文件查找)
 ├── rsync (文件同步)
 ├── git (版本控制)
-├── conda (环境管理,可选)
+├── conda (环境管理，可选)
 └── bash (执行环境)
 ```
 
@@ -879,7 +879,7 @@ export GIT_SSH_COMMAND='ssh -i "$HOME/.ssh/id_rsa"'
 
 - 检查排除列表是否包含所有敏感目录
 - 建议添加 `--exclude ".env"` 和 `--exclude "*.key"`
-- 定期检查备份仓库,确保没有泄露敏感信息
+- 定期检查备份仓库，确保没有泄露敏感信息
 
 ```bash
 # 添加到 EXCLUDES 数组
@@ -894,7 +894,7 @@ EXCLUDES=(
 
 ### 3. 日志文件管理
 
-- 定期清理或轮转日志文件,避免占用过多磁盘空间
+- 定期清理或轮转日志文件，避免占用过多磁盘空间
 - 建议在脚本中添加日志大小检查逻辑
 
 ```bash
@@ -915,7 +915,7 @@ fi
 
 - **备份耗时**: 取决于文件数量和网络速度
 - **时间窗口**: 可以设置备份时间避免网络高峰
-- **大量文件**: 对于大量文件,考虑分批备份
+- **大量文件**: 对于大量文件，考虑分批备份
 
 **优化建议:**
 
@@ -964,7 +964,7 @@ if [ -f "$LOG_FILE" ]; then
     DIFF_HOURS=$(( (CURRENT_TIME - LAST_RUN) / 3600 ))
 
     if [ "$DIFF_HOURS" -gt "$THRESHOLD_HOURS" ]; then
-        # 发送告警(这里使用 echo,实际可以使用 mail 或其他通知工具)
+        # 发送告警(这里使用 echo，实际可以使用 mail 或其他通知工具)
         echo "WARNING: Backup has not run in $DIFF_HOURS hours"
     fi
 fi
